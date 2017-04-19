@@ -1,0 +1,276 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/ben-eb/grunt-available-tasks"
+
+    >grunt-available-tasks (v0.6.3)</a>
+</h1>
+<h4>List available Grunt tasks & targets.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-available-tasks">module grunt-available-tasks</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-available-tasks.grunt-available-tasks">
+            function <span class="apidocSignatureSpan"></span>grunt-available-tasks
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">grunt-available-tasks.</span>reporters</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-available-tasks.reporters">module grunt-available-tasks.reporters</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-available-tasks.reporters.default">
+            function <span class="apidocSignatureSpan">grunt-available-tasks.reporters.</span>default
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-available-tasks.reporters.markdown">
+            function <span class="apidocSignatureSpan">grunt-available-tasks.reporters.</span>markdown
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-available-tasks" id="apidoc.module.grunt-available-tasks">module grunt-available-tasks</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-available-tasks.grunt-available-tasks" id="apidoc.element.grunt-available-tasks.grunt-available-tasks">
+        function <span class="apidocSignatureSpan"></span>grunt-available-tasks
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-available-tasks = function (grunt) {
+    require(&#x27;load-grunt-tasks&#x27;)(grunt);
+    grunt.initConfig({
+        jscs: {
+            options: {
+                config: &#x27;.jscs.json&#x27;
+            },
+            source: [
+                &#x27;lib/**/*.js&#x27;,
+                &#x27;tasks/**/*.js&#x27;,
+                &#x27;test/**/*.js&#x27;
+            ]
+        },
+        jshint: {
+            all: [
+                &#x27;Gruntfile.js&#x27;,
+                &#x27;tasks/**/*.js&#x27;,
+                &#x27;lib/**/*.js&#x27;
+            ],
+            test: {
+                src: [&#x27;test/**/*.js&#x27;],
+                options: {
+                    &#x27;predef&#x27; : [&#x27;describe&#x27;, &#x27;it&#x27;, &#x27;beforeEach&#x27;]
+                }
+            },
+            options: {
+                jshintrc: true
+            },
+        },
+        lintspaces: {
+            source: {
+                src: [
+                    &#x27;tasks/**/*.js&#x27;,
+                    &#x27;test/**/*.js&#x27;,
+                    &#x27;lib/**/*.js&#x27;,
+                    &#x27;Gruntfile.js&#x27;,
+                    &#x27;README.md&#x27;
+                ],
+                options: {
+                    newline         : true,
+                    trailingspaces  : true,
+                    indentation     : &#x27;spaces&#x27;,
+                    spaces          : 4,
+                    ignores         : [&#x27;js-comments&#x27;]
+                }
+            }
+        },
+        availabletasks: {
+            options: {
+                filter: &#x27;include&#x27;,
+                tasks: [&#x27;tasks&#x27;, &#x27;default&#x27;],
+                sort: [&#x27;tasks&#x27;]
+            },
+            defaultreporter: {},
+            markdownreporter: {
+                options: {
+                    reporter: &#x27;markdown&#x27;
+                }
+            },
+            customreporter: {
+                options: {
+                    reporter: function(options) {
+                        grunt.log.writeln(options.currentTask.name);
+                    }
+                }
+            }
+        },
+        mochaTest: {
+            unit: [&#x27;test/lib/**/*.js&#x27;],
+            options: {
+                reporter: &#x27;spec&#x27;
+            }
+        }
+    });
+    // Lint all the things
+    grunt.registerTask(&#x27;default&#x27;, &#x27;Run code validation tasks&#x27;, [&#x27;lintspaces&#x27;, &#x27;jshint&#x27;, &#x27;jscs&#x27;, &#x27;mochaTest&#x27;, &#x27;tasks&#x27;]);
+    // Alias availabletasks with tasks for easier typing
+    grunt.registerTask(&#x27;tasks&#x27;, [&#x27;availabletasks:defaultreporter&#x27;]);
+    // Actually load this plugin&#x27;s task(s).
+    grunt.loadTasks(&#x27;tasks&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-available-tasks.reporters" id="apidoc.module.grunt-available-tasks.reporters">module grunt-available-tasks.reporters</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-available-tasks.reporters.default" id="apidoc.element.grunt-available-tasks.reporters.default">
+        function <span class="apidocSignatureSpan">grunt-available-tasks.reporters.</span>default
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function defaultReporter(options) {
+    var meta    = options.meta,
+        task    = options.currentTask,
+        targets = &#x27;&#x27;;
+
+    if (meta.header &#x26;&#x26; meta.groupCount) {
+        console.log(&#x27;\n&#x27; + chalk.bold(task.group));
+    }
+
+    if (task.targets.length &#x3e; 1) {
+        targets = &#x27;(&#x27; + task.targets.join(&#x27;|&#x27;) + &#x27;)&#x27;;
+    }
+
+    console.log(
+        chalk.cyan(_.padEnd(task.name, meta.longest)),
+        chalk.white(_.pad(task.type, 4)),
+        task.info,
+        chalk.green(targets)
+    );
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-available-tasks.reporters.markdown" id="apidoc.element.grunt-available-tasks.reporters.markdown">
+        function <span class="apidocSignatureSpan">grunt-available-tasks.reporters.</span>markdown
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function markdownReporter(options) {
+    var meta        = options.meta,
+        task        = options.currentTask,
+        targets     = &#x27;&#x27;,
+        indentlevel = &#x27;&#x27;;
+
+    if (meta.header &#x26;&#x26; meta.groupCount) {
+        indentlevel = &#x27;#&#x27;;
+        console.log(&#x27;## &#x27; + task.group + &#x27;\n&#x27;);
+    }
+
+    if (task.targets.length &#x3e; 1) {
+        targets = indentlevel + &#x27;### Targets: `&#x27; + task.targets.join(&#x27;`, `&#x27;) + &#x27;`&#x27;;
+    }
+
+    console.log(indentlevel + &#x27;## &#x27; + task.name + &#x27;\n&#x27; + targets + &#x27;\n&#x27; + task.info + &#x27;\n&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
